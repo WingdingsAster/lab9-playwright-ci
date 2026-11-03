@@ -1,0 +1,15 @@
+test_delivery_ui.py::test_delivery[chromium-0-city-1000-1000] PASSED     [  8%]
+test_delivery_ui.py::test_delivery[chromium-9999-city-1000-10999] PASSED [ 16%]
+test_delivery_ui.py::test_delivery[chromium-10000-city-0-10000] FAILED   [ 25%]
+test_delivery_ui.py::test_delivery[chromium-10001-city-0-10001] PASSED   [ 33%]
+test_delivery_ui.py::test_delivery[chromium-0-region-2000-2000] PASSED   [ 41%]
+test_delivery_ui.py::test_delivery[chromium-9999-region-2000-11999] PASSED [ 50%]
+test_delivery_ui.py::test_delivery[chromium-10000-region-0-10000] FAILED [ 58%]
+test_delivery_ui.py::test_delivery[chromium-10001-region-0-10001] PASSED [ 66%]
+test_delivery_ui.py::test_invalid_amount[chromium-] PASSED               [ 75%]
+test_delivery_ui.py::test_invalid_amount[chromium--1] PASSED             [ 83%]
+test_delivery_ui.py::test_invalid_amount[chromium-12.5] PASSED           [ 91%]
+test_delivery_ui.py::test_reset[chromium] PASSED                         [100%]
+FAILED test_delivery_ui.py::test_delivery[chromium-10000-city-0-10000] - Asse...
+FAILED test_delivery_ui.py::test_delivery[chromium-10000-region-0-10000] - As...
+======================== 2 failed, 10 passed in 14.51s =========================

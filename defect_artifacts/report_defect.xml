@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="12" time="14.513" timestamp="2026-10-27T04:13:12.891093+00:00" hostname="vm"><testcase classname="test_delivery_ui" name="test_delivery[chromium-0-city-1000-1000]" time="0.798" /><testcase classname="test_delivery_ui" name="test_delivery[chromium-9999-city-1000-10999]" time="0.327" /><testcase classname="test_delivery_ui" name="test_delivery[chromium-10000-city-0-10000]" time="5.328"><properties><property name="playwright_screenshot" value="test-results/test-delivery-ui-py-test-delivery-chromium-10000-city-0-10000/test-failed-1.png" /><property name="playwright_trace" value="test-results/test-delivery-ui-py-test-delivery-chromium-10000-city-0-10000/trace.zip" /></properties><failure message="AssertionError: Locator expected to have text 'Доставка: 0 ₸. К оплате: 10000 ₸.'&#10;Actual value: Доставка: 1000 ₸. К оплате: 11000 ₸. &#10;Call log:&#10;  - Expect &quot;to_have_text&quot; with timeout 5000ms&#10;  - waiting for get_by_role(&quot;status&quot;)&#10;    9 × locator resolved to &lt;p id=&quot;result&quot; role=&quot;status&quot;&gt;Доставка: 1000 ₸. К оплате: 11000 ₸.&lt;/p&gt;&#10;      - unexpected value &quot;Доставка: 1000 ₸. К оплате: 11000 ₸.&quot;">page = &lt;Page url='http://127.0.0.1:8000/delivery.html'&gt;, amount = 10000
+zone = 'city', fee = 0, total = 10000
+
+    @pytest.mark.parametrize("amount, zone, fee, total", [
+        (0,     "city",   1000, 1000),    # 1
+        (9999,  "city",   1000, 10999),   # 2
+        (10000, "city",   0,    10000),   # 3
+        (10001, "city",   0,    10001),   # 4
+        (0,     "region", 2000, 2000),    # 5
+        (9999,  "region", 2000, 11999),   # 6
+        (10000, "region", 0,    10000),   # 7
+        (10001, "region", 0,    10001),   # 8
+    ])
+    def test_delivery(page, amount, zone, fee, total):
+        page.get_by_label("Сумма заказа").fill(str(amount))
+        page.get_by_label("Зона доставки").select_option(zone)
+        page.get_by_role("button", name="Рассчитать").click()
+    
+        result = page.get_by_role("status")
+        expect(result).to_be_visible()
+&gt;       expect(result).to_have_text(
+            f"Доставка: {fee} ₸. К оплате: {total} ₸."
+        )
+E       AssertionError: Locator expected to have text 'Доставка: 0 ₸. К оплате: 10000 ₸.'
+E       Actual value: Доставка: 1000 ₸. К оплате: 11000 ₸. 
+E       Call log:
+E         - Expect "to_have_text" with timeout 5000ms
+E         - waiting for get_by_role("status")
+E           9 × locator resolved to &lt;p id="result" role="status"&gt;Доставка: 1000 ₸. К оплате: 11000 ₸.&lt;/p&gt;
+E             - unexpected value "Доставка: 1000 ₸. К оплате: 11000 ₸."
+
+test_delivery_ui.py:24: AssertionError</failure></testcase><testcase classname="test_delivery_ui" name="test_delivery[chromium-10001-city-0-10001]" time="0.315" /><testcase classname="test_delivery_ui" name="test_delivery[chromium-0-region-2000-2000]" time="0.299" /><testcase classname="test_delivery_ui" name="test_delivery[chromium-9999-region-2000-11999]" time="0.313" /><testcase classname="test_delivery_ui" name="test_delivery[chromium-10000-region-0-10000]" time="5.319"><properties><property name="playwright_screenshot" value="test-results/test-delivery-ui-py-test-delivery-chromium-10000-region-0-10000/test-failed-1.png" /><property name="playwright_trace" value="test-results/test-delivery-ui-py-test-delivery-chromium-10000-region-0-10000/trace.zip" /></properties><failure message="AssertionError: Locator expected to have text 'Доставка: 0 ₸. К оплате: 10000 ₸.'&#10;Actual value: Доставка: 2000 ₸. К оплате: 12000 ₸. &#10;Call log:&#10;  - Expect &quot;to_have_text&quot; with timeout 5000ms&#10;  - waiting for get_by_role(&quot;status&quot;)&#10;    9 × locator resolved to &lt;p id=&quot;result&quot; role=&quot;status&quot;&gt;Доставка: 2000 ₸. К оплате: 12000 ₸.&lt;/p&gt;&#10;      - unexpected value &quot;Доставка: 2000 ₸. К оплате: 12000 ₸.&quot;">page = &lt;Page url='http://127.0.0.1:8000/delivery.html'&gt;, amount = 10000
+zone = 'region', fee = 0, total = 10000
+
+    @pytest.mark.parametrize("amount, zone, fee, total", [
+        (0,     "city",   1000, 1000),    # 1
+        (9999,  "city",   1000, 10999),   # 2
+        (10000, "city",   0,    10000),   # 3
+        (10001, "city",   0,    10001),   # 4
+        (0,     "region", 2000, 2000),    # 5
+        (9999,  "region", 2000, 11999),   # 6
+        (10000, "region", 0,    10000),   # 7
+        (10001, "region", 0,    10001),   # 8
+    ])
+    def test_delivery(page, amount, zone, fee, total):
+        page.get_by_label("Сумма заказа").fill(str(amount))
+        page.get_by_label("Зона доставки").select_option(zone)
+        page.get_by_role("button", name="Рассчитать").click()
+    
+        result = page.get_by_role("status")
+        expect(result).to_be_visible()
+&gt;       expect(result).to_have_text(
+            f"Доставка: {fee} ₸. К оплате: {total} ₸."
+        )
+E       AssertionError: Locator expected to have text 'Доставка: 0 ₸. К оплате: 10000 ₸.'
+E       Actual value: Доставка: 2000 ₸. К оплате: 12000 ₸. 
+E       Call log:
+E         - Expect "to_have_text" with timeout 5000ms
+E         - waiting for get_by_role("status")
+E           9 × locator resolved to &lt;p id="result" role="status"&gt;Доставка: 2000 ₸. К оплате: 12000 ₸.&lt;/p&gt;
+E             - unexpected value "Доставка: 2000 ₸. К оплате: 12000 ₸."
+
+test_delivery_ui.py:24: AssertionError</failure></testcase><testcase classname="test_delivery_ui" name="test_delivery[chromium-10001-region-0-10001]" time="0.342" /><testcase classname="test_delivery_ui" name="test_invalid_amount[chromium-]" time="0.333" /><testcase classname="test_delivery_ui" name="test_invalid_amount[chromium--1]" time="0.314" /><testcase classname="test_delivery_ui" name="test_invalid_amount[chromium-12.5]" time="0.333" /><testcase classname="test_delivery_ui" name="test_reset[chromium]" time="0.451" /></testsuite></testsuites>
